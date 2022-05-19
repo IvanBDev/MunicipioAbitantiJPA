@@ -21,18 +21,21 @@ public class TestMunicipioAbitante {
 		try {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
-			
-			  System.out.println( "In tabella Municipio ci sono " +
-			  municipioService.listAllMunicipi().size() + " elementi.");
-			  
-			 /* testInserisciMunicipio(municipioService); System.out.println(
-			  "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
-			  " elementi.");*/
-			  
-			 /* testInserisciAbitante(municipioService, abitanteService); System.out.println(
-			  "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
-			  " elementi.");*/
-			 
+
+			System.out.println(
+					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+
+			/*
+			 * testInserisciMunicipio(municipioService); System.out.println(
+			 * "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
+			 * " elementi.");
+			 */
+
+			/*
+			 * testInserisciAbitante(municipioService, abitanteService); System.out.println(
+			 * "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
+			 * " elementi.");
+			 */
 
 			/*
 			 * testRimozioneAbitante(municipioService, abitanteService); System.out.println(
@@ -48,9 +51,12 @@ public class TestMunicipioAbitante {
 
 			// testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
 
-			//testCercaTuttiTramiteCodiceMunicipioSimileA(municipioService, abitanteService);
+			// testCercaTuttiTramiteCodiceMunicipioSimileA(municipioService,
+			// abitanteService);
+
+			//testCercaTuttiIMunicipiConMinorenni(municipioService, abitanteService);
 			
-			testCercaTuttiIMunicipiConMinorenni(municipioService, abitanteService);
+			testCercaTuttiIMunicipiConLADescrizioneCheIniziaPer(municipioService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -222,18 +228,31 @@ public class TestMunicipioAbitante {
 
 	public static void testCercaTuttiIMunicipiConMinorenni(MunicipioService municipioService,
 			AbitanteService abitanteService) throws Exception {
-		System.out.println(
-				".......................testCercaTuttiIMunicipiConMinorenni inizio........................");
-		
+		System.out.println(".......................testCercaTuttiIMunicipiConMinorenni inizio........................");
+
 		List<Abitante> listaAbitantiPresenti = abitanteService.listAllAbitanti();
 		if (listaAbitantiPresenti.isEmpty())
-			throw new RuntimeException(
-					"testCercaTuttiIMunicipiConMinorenni fallito: non ci sono abitanti nel DB ");
+			throw new RuntimeException("testCercaTuttiIMunicipiConMinorenni fallito: non ci sono abitanti nel DB ");
 
 		System.out.println(municipioService.cercaTuttiIMunicipiConMinorenni());
+
+		System.out.println(".......................testCercaTuttiIMunicipiConMinorenni fine........................");
+	}
+
+	public static void testCercaTuttiIMunicipiConLADescrizioneCheIniziaPer(MunicipioService municipioService)
+			throws Exception {
+		System.out.println(".......................testCercaTuttiIMunicipiConLADescrizioneCheIniziaPer inizio........................");
 		
-		System.out.println(
-				".......................testCercaTuttiIMunicipiConMinorenni fine........................");
+		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
+		if (listaMunicipiPresenti.isEmpty())
+			throw new RuntimeException(
+					"testCercaTuttiGliAbitantiConNome fallito: non ci sono municipi a cui collegarci ");
+		
+		String inizialeDescrizioneInput = "m";
+		System.out.println(municipioService.cercaTuttiIMunicipiConLADescrizioneCheIniziaPer(inizialeDescrizioneInput));
+		
+		
+		System.out.println(".......................testCercaTuttiIMunicipiConLADescrizioneCheIniziaPer fine........................");
 	}
 
 }
