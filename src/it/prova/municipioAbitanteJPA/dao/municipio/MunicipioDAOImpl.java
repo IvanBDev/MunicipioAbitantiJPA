@@ -67,7 +67,7 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 	// TO DO PER ESERCIZIO
 	@Override
 	public List<Municipio> findAllByAbitantiMinorenni() throws Exception {
-		return entityManager.createQuery("SELECT DISTINC m FROM Municipio m join m.abitanti.eta < 18", Municipio.class).getResultList();
+		return entityManager.createQuery("SELECT DISTINCT m FROM Municipio m join m.abitanti WHERE eta < 18", Municipio.class).getResultList();
 	}
 
 	@Override
