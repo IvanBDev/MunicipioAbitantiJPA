@@ -21,28 +21,34 @@ public class TestMunicipioAbitante {
 		try {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
-			/*System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+			/*
+			 * System.out.println( "In tabella Municipio ci sono " +
+			 * municipioService.listAllMunicipi().size() + " elementi.");
+			 * 
+			 * testInserisciMunicipio(municipioService); System.out.println(
+			 * "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
+			 * " elementi.");
+			 * 
+			 * testInserisciAbitante(municipioService, abitanteService); System.out.println(
+			 * "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
+			 * " elementi.");
+			 */
 
-			testInserisciMunicipio(municipioService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+			/*
+			 * testRimozioneAbitante(municipioService, abitanteService); System.out.println(
+			 * "In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() +
+			 * " elementi.");
+			 * 
+			 * testCercaTuttiGliAbitantiConNome(municipioService, abitanteService);
+			 * System.out.println( "In tabella Municipio ci sono " +
+			 * municipioService.listAllMunicipi().size() + " elementi.");
+			 */
 
-			testInserisciAbitante(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");*/
+			// testLazyInitExc(municipioService, abitanteService);
 
-			/*testRimozioneAbitante(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
-
-			testCercaTuttiGliAbitantiConNome(municipioService, abitanteService);
-			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");*/
-
-			//testLazyInitExc(municipioService, abitanteService);
+			// testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
 			
-			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
+			testCercaTuttiTramiteCodiceMunicipioSimileA(municipioService, abitanteService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -179,20 +185,40 @@ public class TestMunicipioAbitante {
 		// municipioService.caricaSingoloMunicipioConAbitanti(...);
 		System.out.println(".......testLazyInitExc fine: PASSED.............");
 	}
-	
-	public static void testCercaTuttiGliAbitantiConCognome(MunicipioService municipioService, AbitanteService abitanteService) throws Exception{
+
+	public static void testCercaTuttiGliAbitantiConCognome(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
 		System.out.println(".......................testCercaTuttiGliAbitantiConCognome inizio........................");
+
+		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
+		if (listaMunicipiPresenti.isEmpty())
+			throw new RuntimeException(
+					"testCercaTuttiGliAbitantiConNome fallito: non ci sono municipi a cui collegarci ");
+
+		String cognomeInput = "Bendotti";
+		System.out.println(abitanteService.cercaTuttiGliAbitantiConCognome(cognomeInput));
+
+		System.out.println(".......................testCercaTuttiGliAbitantiConCognome fine........................");
+	}
+
+	public static void testCercaTuttiTramiteCodiceMunicipioSimileA(MunicipioService municipioService,
+			AbitanteService abitanteService) throws Exception {
+		System.out.println(".......................testCercaTuttiTramiteCodiceMunicipioSimileA inizio........................");
 		
 		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
 		if (listaMunicipiPresenti.isEmpty())
 			throw new RuntimeException(
 					"testCercaTuttiGliAbitantiConNome fallito: non ci sono municipi a cui collegarci ");
 		
-		String cognomeInput = "Bendotti";
-		System.out.println(abitanteService.cercaTuttiGliAbitantiConCognome(cognomeInput));
+		String codiceInput = "I";
+		System.out.println(abitanteService.cercaTuttiTramiteCodiceMunicipioSimileA(codiceInput));
 		
 		
 		
+		
+		System.out.println(".......................testCercaTuttiTramiteCodiceMunicipioSimileA fine........................");
+		
+
 	}
 
 }
