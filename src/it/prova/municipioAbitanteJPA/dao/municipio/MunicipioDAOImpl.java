@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.mysql.cj.xdevapi.CreateIndexParams;
+
 import it.prova.municipioAbitanteJPA.model.Municipio;
 
 public class MunicipioDAOImpl implements MunicipioDAO {
@@ -72,8 +74,9 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 
 	@Override
 	public List<Municipio> findAllByDescrizioneIniziaCon(String iniziale) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Municipio> query = entityManager.createQuery("FROM Municipio m WHERE m.descrizione Like ?1", Municipio.class);
+		
+		return query.setParameter(1, iniziale + "%").getResultList();
 	}
 
 }
