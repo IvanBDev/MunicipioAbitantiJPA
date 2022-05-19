@@ -61,7 +61,7 @@ public class AbitanteDAOImpl implements AbitanteDAO {
 	// TO DO PER ESERCIZIO
 	@Override
 	public List<Abitante> findAllByCognome(String cognome) throws Exception {
-		TypedQuery<Abitante> query = entityManager.createQuery("FROM Abitante a WHERE a.cognome = ?", Abitante.class);
+		TypedQuery<Abitante> query = entityManager.createQuery("FROM Abitante a WHERE a.cognome = ?1", Abitante.class);
 		
 		return query.setParameter(1, cognome).getResultList();
 	}

@@ -21,7 +21,7 @@ public class TestMunicipioAbitante {
 		try {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
-			System.out.println(
+			/*System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
 			testInserisciMunicipio(municipioService);
@@ -30,17 +30,19 @@ public class TestMunicipioAbitante {
 
 			testInserisciAbitante(municipioService, abitanteService);
 			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");*/
 
-			testRimozioneAbitante(municipioService, abitanteService);
+			/*testRimozioneAbitante(municipioService, abitanteService);
 			System.out.println(
 					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
 
 			testCercaTuttiGliAbitantiConNome(municipioService, abitanteService);
 			System.out.println(
-					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");
+					"In tabella Municipio ci sono " + municipioService.listAllMunicipi().size() + " elementi.");*/
 
-			testLazyInitExc(municipioService, abitanteService);
+			//testLazyInitExc(municipioService, abitanteService);
+			
+			testCercaTuttiGliAbitantiConCognome(municipioService, abitanteService);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -78,7 +80,7 @@ public class TestMunicipioAbitante {
 		if (listaMunicipiPresenti.isEmpty())
 			throw new RuntimeException("testInserisciAbitante fallito: non ci sono municipi a cui collegarci ");
 
-		Abitante nuovoAbitante = new Abitante("Pluto", "Plutorum", 77, "Via Lecce");
+		Abitante nuovoAbitante = new Abitante("Paolo", "Bendotti", 55, "Via Cagliari");
 		// lo lego al primo municipio che trovo
 		nuovoAbitante.setMunicipio(listaMunicipiPresenti.get(0));
 
@@ -176,6 +178,21 @@ public class TestMunicipioAbitante {
 		// se usiamo un caricamento EAGER risolviamo...dipende da cosa ci serve!!!
 		// municipioService.caricaSingoloMunicipioConAbitanti(...);
 		System.out.println(".......testLazyInitExc fine: PASSED.............");
+	}
+	
+	public static void testCercaTuttiGliAbitantiConCognome(MunicipioService municipioService, AbitanteService abitanteService) throws Exception{
+		System.out.println(".......................testCercaTuttiGliAbitantiConCognome inizio........................");
+		
+		List<Municipio> listaMunicipiPresenti = municipioService.listAllMunicipi();
+		if (listaMunicipiPresenti.isEmpty())
+			throw new RuntimeException(
+					"testCercaTuttiGliAbitantiConNome fallito: non ci sono municipi a cui collegarci ");
+		
+		String cognomeInput = "Bendotti";
+		System.out.println(abitanteService.cercaTuttiGliAbitantiConCognome(cognomeInput));
+		
+		
+		
 	}
 
 }
